@@ -1553,7 +1553,7 @@ Details:
 **Extensions:**
 - **1a. One of a course section's configured due days arrives:**
   - 1a1. The system determines which students in that course section have not submitted (according to the definition in the Associated Information of this use case).
-  - 1a2. The system sends reminder emails to the students with unsubmitted work for the previous week, each mentioning only the work that student has not submitted.
+  - 1a2. The system sends reminder emails only about the item due that day, and only to the students who have not submitted it (BR-reminder-limits).
   - 1a3. Use case ends.
 - **2a. A student in the course section is not assigned to a team:**
   - 2a1. The system leaves the student off the list and sends her no reminder, since she cannot submit either item (BR-team-assignment-required).
