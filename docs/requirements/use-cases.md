@@ -1522,6 +1522,85 @@ Details:
 **Assumptions:**
 **Open Issues:**
 
+### **UC-STU-remind-students-unsubmitted-work: The instructor reminds students with an unsubmitted weekly activity report or peer evaluation**
+
+**UC ID and Name:** UC-STU-remind-students-unsubmitted-work: Remind students with an unsubmitted weekly activity report or peer evaluation for the previous week
+**Created By:** Sebastian Tran
+**Date Created:** 10/2/26
+**Primary Actor:** instructor
+**Secondary Actors:** student
+**Trigger:** The instructor indicates to check all students' submission statuses in a course section for the previous week, to determine and remind the students who have not submitted; or one of a course section's configured due days arrives.
+**Description:** The instructor wants to remind students who have not submitted their weekly activity report or peer evaluation for the previous week so that they can make sure the students are keeping up with their team's project. On each of the course section's configured due days, the system automatically sends the reminder only to students who have not submitted.
+
+**Preconditions:**
+- PRE-1. The instructor is logged into the system.
+- PRE-2. The instructor is assigned to the course section (BR-section-scoped-access).
+
+**Postconditions:**
+- POST-1. Students with unsubmitted weekly activity reports or peer evaluations for the previous week receive a reminder by email to submit only the work they have not submitted.
+- POST-2. No student is reminded about work they have already submitted for the previous week.
+- POST-3. The instructor is told which students were reminded.
+
+**Main Success Scenario:**
+1. The instructor indicates to check all students' submission statuses in a course section for the previous week, to determine and remind the students who have not submitted their weekly activity report or peer evaluation.
+2. The system determines which students have not submitted (according to the definition in the Associated Information of this use case).
+3. The system displays the students' names and which items are unsubmitted for the previous week.
+4. The instructor confirms to send reminders to all students listed.
+5. The system sends reminder emails to the students with unsubmitted work for the previous week, each mentioning only the work that student has not submitted.
+6. The system informs the instructor which students were reminded.
+7. Use case ends.
+
+**Extensions:**
+- **1a. One of a course section's configured due days arrives:**
+  - 1a1. The system determines which students in that course section have not submitted (according to the definition in the Associated Information of this use case).
+  - 1a2. The system sends reminder emails only about the item due that day, and only to the students who have not submitted it (BR-reminder-limits).
+  - 1a3. Use case ends.
+- **2a. A student in the course section is not assigned to a team:**
+  - 2a1. The system leaves the student off the list and sends her no reminder, since she cannot submit either item (BR-team-assignment-required).
+  - 2a2. The flow continues at step 3.
+- **2b. A student in the course section is deactivated:**
+  - 2b1. The system leaves the student off the list and sends her no reminder, since she cannot submit either item (BR-student-lifecycle).
+  - 2b2. The flow continues at step 3.
+- **2c. The previous week is not one of the course section's active weeks:**
+  - 2c1. The system informs the instructor that the previous week was not an active week and that no reminders will be sent; in the automatic path (1a), the system sends no reminders (BR-active-weeks).
+  - 2c2. Use case ends.
+- **2d. The peer evaluation's submission window for the previous week has closed:**
+  - 2d1. The system leaves the peer evaluation out of the student's reminder; a student still missing her weekly activity report is still listed and reminded for it (BR-evaluation-submission-window).
+  - 2d2. The flow continues at step 3.
+- **2e. No student in the course section has unsubmitted work for the previous week:**
+  - 2e1. The system informs the instructor that no student has unsubmitted work for the previous week; in the automatic path (1a), the system sends no reminders.
+  - 2e2. Use case ends.
+- **5a. A student has already received a manual reminder for an item for the previous week:**
+  - 5a1. The system skips the items for which the student has already received a manual reminder and sends any remaining items (BR-reminder-limits).
+  - 5a2. The flow continues at step 6, where the system also informs the instructor which students were skipped for which items because the reminder limit was reached.
+- **5b. The system cannot email one or more students:**
+  - 5b1. The system continues with the remaining students rather than abandoning the batch, so that one undeliverable address does not cost the other students their reminder.
+  - 5b2. The flow continues at step 6, where the system also informs the instructor which students could not be emailed.
+- **5c. A student submits an item after the list is displayed but before the reminders are sent:**
+  - 5c1. The system checks each item again at the time of sending and does not remind the student about any item she has since submitted.
+  - 5c2. The flow continues at step 5.
+
+**Priority:** Medium
+**Frequency of Use:** Automatic: on each of a course section's configured due days (typically twice per week). Instructor: occasional, a few times per week per course section.
+**Business Rules:** BR-section-scoped-access, BR-team-assignment-required, BR-student-lifecycle, BR-active-weeks, BR-evaluation-submission-window, BR-reminder-limits
+
+**Associated Information:**
+- Definition of "has not submitted" (checked for the previous week at the time of checking, including again at the time of sending):
+  - A student has not submitted her weekly activity report if she has no activities recorded for the previous week. A student who added activities and later deleted all of them has not submitted.
+  - A student has not submitted her peer evaluation if she has not evaluated every member of her team, herself included, for the previous week.
+  - A student missing either item is included, and her reminder mentions only the items she is missing.
+- No reminders are sent when the previous week is not an active week.
+- The items due on a course section's due day are those covering the previous week, so the automatic reminder (extension 1a) concerns the same week as the instructor's path.
+- Because reminders concern only the previous week, whose peer evaluation window is open throughout the current week, extension 2d is a safeguard rather than an expected path.
+- Weekly activity reports have no submission window; a missing weekly activity report remains eligible for a reminder.
+- In the automatic path (extension 1a), addresses that cannot be emailed are logged, since there is no instructor to inform.
+- Submission statuses are student records (CO-ferpa). The list of students who have not submitted is visible only to instructors of the course section (BR-section-scoped-access); it is never shown to students.
+- This use case changes the scheduled reminder specified by FR-NOT-weekly-reminder, which today emails every student in the course section on its due days.
+
+**Related Use Cases:** UC-WAR-manage-activities: Manage activities in a weekly activity report; UC-EVA-submit-evaluation: Submit a peer evaluation for the previous week; UC-STU-view-pending-invitations: View the students who have not registered yet.
+**Assumptions:**
+**Open Issues:**
+
 ## **Instructor**
 
 ### **UC-INS-invite-instructors: The course admin invites instructors to register an account**
