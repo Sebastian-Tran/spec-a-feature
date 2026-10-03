@@ -1587,7 +1587,7 @@ Details:
 **Associated Information:**
 - Definition of "has not submitted" (checked for the previous week at the time of checking, including again at the time of sending):
   - A student has not submitted her weekly activity report if she has no activities recorded for the previous week. A student who added activities and later deleted all of them has not submitted.
-  - A student has not submitted her peer evaluation if she has no peer evaluation for the previous week.
+  - A student has not submitted her peer evaluation if she has not evaluated every member of her team, herself included, for the previous week.
   - A student missing either item is included, and her reminder mentions only the items she is missing.
 - No reminders are sent when the previous week is not an active week.
 - Weekly activity reports have no submission window; a missing weekly activity report remains eligible for a reminder.
