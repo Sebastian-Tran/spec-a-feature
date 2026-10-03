@@ -1525,8 +1525,8 @@ Details:
 ### **UC-STU-remind-students-unsubmitted-work: The instructor reminds students with an unsubmitted weekly activity report or peer evaluation**
 
 **UC ID and Name:** UC-STU-remind-students-unsubmitted-work: Remind students with an unsubmitted weekly activity report or peer evaluation for the previous week
-**Created By:** [your name]
-**Date Created:** [date]
+**Created By:** Sebastian Tran
+**Date Created:** 10/2/26
 **Primary Actor:** instructor
 **Secondary Actors:** student
 **Trigger:** The instructor indicates to check all students' submission statuses in a course section for the previous week, to determine and remind the students who have not submitted; or one of a course section's configured due days arrives.
@@ -1590,6 +1590,8 @@ Details:
   - A student has not submitted her peer evaluation if she has not evaluated every member of her team, herself included, for the previous week.
   - A student missing either item is included, and her reminder mentions only the items she is missing.
 - No reminders are sent when the previous week is not an active week.
+- The items due on a course section's due day are those covering the previous week, so the automatic reminder (extension 1a) concerns the same week as the instructor's path.
+- Because reminders concern only the previous week, whose peer evaluation window is open throughout the current week, extension 2d is a safeguard rather than an expected path.
 - Weekly activity reports have no submission window; a missing weekly activity report remains eligible for a reminder.
 - In the automatic path (extension 1a), addresses that cannot be emailed are logged, since there is no instructor to inform.
 - Submission statuses are student records (CO-ferpa). The list of students who have not submitted is visible only to instructors of the course section (BR-section-scoped-access); it is never shown to students.
